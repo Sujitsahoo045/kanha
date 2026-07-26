@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love ❤️</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Segoe UI, sans-serif;
+        }
+
+        body {
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4, #ffd1ff);
+        }
+
+        .container {
+            position: relative;
+            text-align: center;
+        }
+
+        .gift {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin: auto;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .open .gift {
+            overflow: visible;
+        }
+
+        .box {
+            position: absolute;
+            bottom: 0;
+            width: 180px;
+            height: 120px;
+            background: #ff4d6d;
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, .25);
+        }
+
+        .ribbon-v {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 120px;
+            background: #fff;
+        }
+
+        .ribbon-h {
+            position: absolute;
+            top: 45px;
+            width: 180px;
+            height: 30px;
+            background: #fff;
+        }
+
+        .lid {
+            position: absolute;
+            top: 40px;
+            left: -5px;
+            width: 190px;
+            height: 35px;
+            background: #ff6b81;
+            border-radius: 8px;
+            transform-origin: left center;
+            transition: .8s;
+            z-index: 20;
+        }
+
+        .lid::before {
+            content: "🎀";
+            position: absolute;
+            left: 50%;
+            top: -28px;
+            transform: translateX(-50%);
+            font-size: 42px;
+        }
+
+        .open .lid {
+            transform: rotate(-125deg);
+        }
+
+        .message {
+            position: absolute;
+            width: 320px;
+            max-width: 90vw;
+            left: 50%;
+            top: -180px;
+            transform: translateX(-50%) translateY(30px);
+            opacity: 0;
+            transition: 1s;
+            color: #fff;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, .35);
+        }
+
+        .open .message {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .message h1 {
+            font-size: 30px;
+        }
+
+        .message p {
+            margin-top: 10px;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .clickText {
+            margin-top: 25px;
+            color: #fff;
+            font-weight: bold;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: .4;
+            }
+        }
+
+        .emoji {
+            position: absolute;
+            left: 50%;
+            bottom: 100px;
+            transform: translateX(-50%);
+            pointer-events: none;
+            user-select: none;
+            z-index: 5;
+        }
+
+        @media(max-width:480px) {
+
+            .gift {
+                width: 140px;
+                height: 140px;
+            }
+
+            .box {
+                width: 140px;
+                height: 95px;
+            }
+
+            .ribbon-h {
+                width: 140px;
+                height: 24px;
+                top: 35px;
+            }
+
+            .ribbon-v {
+                width: 24px;
+                height: 95px;
+            }
+
+            .lid {
+                width: 150px;
+                height: 28px;
+                left: -5px;
+                top: 48px;
+            }
+
+            .message {
+                top: -170px;
+            }
+
+            .message h1 {
+                font-size: 22px;
+            }
+
+            .message p {
+                font-size: 16px;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="message">
+            <h1>💖 I Love You 💖</h1>
+
+            <p>
+                Every heartbeat reminds me of you ❤️<br>
+                You are my smile, my happiness,<br>
+                and the most beautiful part of my life. 💕<br><br>
+
+                Forever Yours 💖
+            </p>
+
+        </div>
+
+        <div class="gift" id="gift">
+
+            <div class="lid"></div>
+
+            <div class="box">
+                <div class="ribbon-v"></div>
+                <div class="ribbon-h"></div>
+            </div>
+
+        </div>
+
+        <div class="clickText">
+            🎁 Tap the Gift 🎁
+        </div>
+
+    </div>
+
+    <script>
+
+        const gift = document.getElementById("gift");
+        const container = document.querySelector(".container");
+
+        let opened = false;
+
+        gift.addEventListener("click", () => {
+
+            if (opened) return;
+
+            opened = true;
+
+            container.classList.add("open");
+
+            // Create kisses
+            for (let i = 0; i < 180; i++) {
+
+                setTimeout(createKiss, i * 20);
+
+            }
+
+        });
+
+        function createKiss() {
+
+            const kiss = document.createElement("div");
+
+            kiss.className = "emoji";
+
+            kiss.innerHTML = "💋";
+
+            // Start from inside the gift
+            kiss.style.left = "90px";
+            kiss.style.bottom = "100px";
+            kiss.style.fontSize = (22 + Math.random() * 18) + "px";
+
+            gift.appendChild(kiss);
+
+            // Random direction
+            const x = (Math.random() - 0.5) * 250;
+            const y = -(350 + Math.random() * 250);
+
+            kiss.animate([
+                {
+                    transform: "translate(-50%,0) scale(.2)",
+                    opacity: 0
+                },
+                {
+                    opacity: 1,
+                    offset: .15
+                },
+                {
+                    transform: `translate(calc(-50% + ${x}px),${y}px) rotate(${Math.random() * 720}deg) scale(1.5)`,
+                    opacity: 0
+                }
+            ], {
+                duration: 2500 + Math.random() * 1500,
+                easing: "ease-out",
+                fill: "forwards"
+            });
+
+            setTimeout(() => {
+                kiss.remove();
+            }, 4000);
+
+        }
+
+    </script>
+
+</body>
+
+</html>
